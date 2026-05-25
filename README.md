@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 50
----
-
 # FactorCraft
 
 **FactorCraft**: A Standardized Full-process
