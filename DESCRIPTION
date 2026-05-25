@@ -1,0 +1,19 @@
+Package: FactorCraft
+Title: Factor Engineering Toolkit for Quantitative Investment
+Version: 0.1.0
+Authors@R: person("Deng Yishuo", , role = c("aut", "cre"), email = "dengyishuo@163.com")
+Description: A toolkit for factor generation, industry/marketcap neutralization,
+    factor orthogonalization, correlation analysis, and multi-factor synthesis
+    in quantitative investment.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+Imports:
+    data.table,
+    dplyr,
+    tidyr,
+    stats,
+    utils,
+    ggplot2,
+    ppcor
