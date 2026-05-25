@@ -16,4 +16,8 @@ Imports:
     xts,
     zoo,
     stats,
-    utils
+    utils,
+    TTR,
+    tibble,
+    magrittr,
+    rlang
