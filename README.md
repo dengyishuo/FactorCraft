@@ -1,307 +1,265 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 50
+---
+
 # FactorCraft
 
-**FactorCraft**: A Standardized Full\-process Factor Engineering Toolkit for A\-share Quantitative Research
-
+**FactorCraft**: A Standardized Full-process
+Factor Engineering Toolkit for A-share
+Quantitative Research
 **FactorCraft**：一款面向A股量化投资的轻量、标准化、全流程因子工程R工具包
 
----
+--------------------------------------------------
 
-## ✨ Project Introduction
+## Project Introduction
 
-**FactorCraft** is a standardized factor development framework designed for A\-share quantitative research\. It solves common pain points in quantitative research, including messy raw data, inconsistent function logic, cumbersome multi\-period calculation, poor code reusability and irregular output formats\.
+## 项目简介
 
-All functions in this package follow **unified parameter specifications, unified output formats and chainable calling styles**\. It supports one\-click multi\-period factor batch calculation and standardized preprocessing, out\-of\-the\-box, fully adapted to A\-share quantitative research and backtesting scenarios\.
+**FactorCraft** is a standardized factor
+development framework designed for A-share
+quantitative research. It resolves common issues
+including disordered raw data, inconsistent
+function logic, repetitive multi-period
+calculation, low code reusability and non-standard
+output layout.
 
-## ✨ 项目简介
+**FactorCraft**
+是专为A股量化研究打造的标准化因子开发框架，解决数据杂乱、函数逻辑不统一、多周期计算繁琐、代码复用性差、输出格式不规范等常见问题。
 
-**FactorCraft** 是专为A股量化研究打造的标准化因子开发框架，解决量化研究中数据杂乱、函数逻辑不统一、多周期计算繁琐、代码复用性差、输出格式不规范等核心痛点。
+All functions adopt unified parameter rules,
+output styles and chainable calling mode. Support
+one-click batch multi-period calculation and
+standard preprocessing, ready to use and fully
+compatible with A-share factor mining and strategy
+backtest.
 
-本包所有函数遵循**统一参数规范、统一输出格式、链式调用风格**，支持一键批量多周期因子计算、标准化预处理，开箱即用，完全适配A股量化研究、策略回测、因子挖掘场景。
+所有函数遵循统一参数规范、统一输出格式与链式调用风格，支持一键批量多周期因子计算与标准化预处理，开箱即用，适配A股因子挖掘、策略回测各类场景。
 
----
+## Core Design Philosophy
 
-## 🎯 Core Design Philosophy
+## 核心设计思路
 
-- **Unified Architecture**: All `add\_\*` series functions share identical parameters, logic and return formats, learn once and use universally\.
+-   **Unified Architecture** All `add_*` series
+    functions own identical parameters and return
+    structure, easy to master and reuse.
+    统一架构：全系函数参数、逻辑、返回格式一致，一次学习即可通用
 
-- **Multi\-period Batch Calculation**: Natively support single period or vector multi\-period batch calculation with automatic column naming, no manual loop required\.
+-   **Multi-period Batch Calculation** Native
+    support single or multiple periods, column
+    names generated automatically without manual
+    loop.
+    多周期批量运算：支持单周期/多周期批量计算，自动命名列，无需手写循环
 
-- **Dual Output Mode**: Support appending factors to raw data or exporting independent factor matrix separately\.
+-   **Dual Output Mode** Attach factors to
+    original data or extract independent factor
+    matrix separately.
+    双输出模式：可追加因子至原数据，也可单独导出纯净因子表
 
-- **Dual Format Compatibility**: Freely switch output between `tibble` and `data\.frame` to adapt all upstream and downstream code\.
+-   **Dual Format Compatibility** Switch freely
+    between tibble and data.frame to match diverse
+    coding scenarios.
+    双格式兼容：输出格式灵活切换，适配上下游各类代码环境
 
-- **Time Series Safety**: Force grouping by stock code and sorting by date to completely avoid cross\-stock and time sequence disorder errors\.
+-   **Time Series Safety** Mandatory grouping by
+    stock code and sorting by date, eliminate
+    cross-stock and sequence disorder errors.
+    时序安全校验：强制个股分组+日期排序，规避串股、时序错乱等致命问题
 
-- **Native Algorithm**: Calculation based on native `TTR` algorithms, fully consistent with standard quantitative indicators in the industry\.
+-   **Standard Native Algorithm** Calculation
+    based on TTR official algorithm, consistent
+    with mainstream industry quantitative
+    indicators.
+    原生标准算法：依托官方算法计算，指标结果贴合行业通用量化标准
 
-## 🎯 核心设计思路
+## Implemented Modules
 
-- **统一架构**：所有 `add\_\*` 系列函数参数、逻辑、返回格式完全统一，一次学习，全系列通用。
+## 已实现功能模块
 
-- **多周期批量计算**：原生支持单周期/向量多周期批量运算，自动命名生成因子列，无需手动编写循环。
+### 1. Data Acquisition 基础数据模块
 
-- **双输出模式**：支持追加因子至原数据、单独导出独立因子矩阵两种模式。
+-   `get_data()`: Download daily A-share market
+    data and return standard long panel data
+-   `get_data()`：批量获取A股日线行情，输出量化标准长面板数据
 
-- **双格式兼容**：输出可自由切换 `tibble` / `data\.frame`，适配所有上下游代码场景。
+### 2. Factor Generation 因子生成模块
 
-- **时序安全**：强制按股票代码分组、日期排序，彻底杜绝跨股错乱、时序错位等量化致命bug。
+-   `add_return()`: Multi-period continuous log
+    return & discrete simple return
 
-- **原生算法复刻**：底层基于TTR官方原生算法计算，结果对标行业标准量化指标，精准可靠。
+-   `add_return()`：多周期收益率因子，支持对数收益、简单收益
 
----
+-   `add_mom()`: Multi-period momentum factor
+    reflecting price trend strength
 
-## 📦 Implemented Modules
+-   `add_mom()`：多周期动量因子，衡量标的趋势强弱
 
-### 1\. Data Acquisition Module
+-   `add_sma()`: Simple moving average price
+    indicator
 
-- `get\_data\(\)`: Batch download A\-share daily market data and return standard long\-format panel data\.
+-   `add_sma()`：收盘价简单移动平均指标
 
-### 2\. Factor Generation Module
+-   `add_vol_std()`: Rolling return volatility
+    factor
 
-- `add\_return\(\)`: Multi\-period return factors \(continuous log return / discrete simple return\)\.
+-   `add_vol_std()`：收益率滚动波动率因子
 
-- `add\_mom\(\)`: Multi\-period momentum factors \(trend strength indicators\)\.
+-   `add_risk_adj_mom()`: Risk-adjusted momentum
+    with Vol/VaR/CVaR adjustment
 
-### 3\. Utility Compatibility Module
+-   `add_risk_adj_mom()`：波动率、VaR、CVaR三类风险调整动量因子
 
-- `utils\-pipe\.R`: Uniform pipe operator, resolve naming conflicts between dplyr and xts, ensure global environment stability\.
+### 3. Compatibility Tool 工具兼容模块
 
-## 📦 已实现功能模块
+-   Internal conflict handling between dplyr and
+    xts to guarantee stable operation
+-   内置冲突适配，解决常用包函数命名冲突，保障运行稳定
 
-### 1\. 基础数据模块
+## Unified Parameter Specification
 
-- `get\_data\(\)`：A股日线行情批量下载，输出量化标准长格式面板数据。
+## 全包统一参数规范
 
-### 2\. 因子生成模块
+Universal parameters for all `add_*` functions
+全系因子函数共用一套参数体系：
 
-- `add\_return\(\)`：多周期收益率因子（支持对数收益、简单收益）。
+-   `data`: Standard market dataset generated by
+    get_data
 
-- `add\_mom\(\)`：多周期动量因子，衡量标的价格趋势强弱。
+-   `data`：标准行情数据集，由数据接口函数生成
 
-### 3\. 工具兼容模块
+-   `close_col`: Calculation benchmark price
+    column, default close
 
-- `utils\-pipe\.R`：统一管道符，解决dplyr与xts函数命名冲突，保证全局运行环境稳定。
+-   `close_col`：计算基准价格字段，默认收盘价
 
----
+-   `new_col`: Prefix of generated factor column
+    names
 
-## ⚙️ Unified Parameter Specification
+-   `new_col`：输出因子列名前缀
 
-All `add\_\*` factor functions share the same universal parameters:
+-   `n`: Calculation lookback period, support
+    single value or vector group
 
-- `data`: Standard long\-format market data from `get\_data`\.
+-   `n`：回溯计算周期，支持单周期、多周期数组批量运算
 
-- `close\_col`: Benchmark price column for calculation, default as `close`\.
+-   `type`: Return mode, continuous for log
+    return, discrete for simple return
 
-- `new\_col`: Prefix of output factor column; auto generate `prefix\_period` if empty\.
+-   `type`：收益计算类型，对数收益/简单收益可选
 
-- `n`: Lookback period, support single value or vector \(e\.g\.,`1`, `c\(1,5,10\)`\)\.
+-   `na.pad`: Reserve empty NA values at initial
+    period, default TRUE
 
-- `type`: Return type, `continuous`\(log return\) / `discrete`\(simple return\)\.
+-   `na.pad`：是否保留前期空值，默认开启
 
-- `na\.pad`: Whether to pad leading NA values, default `TRUE`\.
+-   `append`: True to merge factors into raw data,
+    False to output pure factors
 
-- `append`: `TRUE` append factors to raw data; `FALSE` return only core factor fields\.
+-   `append`：是否将因子并入原数据，关闭则仅输出因子字段
 
-- `output`: Output format, support `tibble` / `data\.frame`\.
+-   `output`: Choose tibble or data.frame output
+    format
 
-## ⚙️ 全包统一参数规范
+-   `output`：切换输出表格格式
 
-所有 `add\_\*` 因子函数通用一套参数体系，完全统一、零学习成本：
+## Installation & Quick Start
 
-- `data`：标准长格式行情数据，由 `get\_data`函数生成。
+## 安装教程 & 快速上手
 
-- `close\_col`：计算基准价格列，默认收盘价 `close`。
+### Install 安装方式
 
-- `new\_col`：因子列名前缀，为空则自动生成「前缀\_周期」格式列名。
+Only available via GitHub installation currently
+当前仅支持GitHub在线安装，暂未上架CRAN
 
-- `n`：计算周期，支持单数值、多周期向量批量计算。
-
-- `type`：收益类型，可选 continuous 对数收益 / discrete 简单收益。
-
-- `na\.pad`：是否前置填充空值NA，默认开启。
-
-- `append`：TRUE 追加因子到原数据；FALSE 仅导出核心因子字段。
-
-- `output`：输出格式，自由切换 tibble / data\.frame。
-
----
-
-## 🚀 Installation \&amp; Quick Start
-
-### 1\. Installation
-
-Currently, FactorCraft only supports **GitHub online installation** \(not released on CRAN\)\.
-
-```r
-# Install devtools if not installed
+``` r
 if (!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
 
-# Install latest FactorCraft from GitHub
 devtools::install_github("dengyishuo/FactorCraft")
-
 ```
 
-### 2\. Load Package \&amp; Get Data
+### Load and Access Data 加载包与获取数据
 
-```r
-# Load library
+``` r
 library(FactorCraft)
-
-# Obtain A-share market data
 dat <- get_data(stock_list, start = "2020-01-01", end = "2025-01-01")
-
 ```
 
-### 3\. Multi\-period Return Calculation
+### Calculate Return Factor 收益率计算
 
-```r
-# Default: 1/5/10-day log return, append to raw data
+``` r
+# Default multi-period return
 dat_with_ret <- add_return(dat)
-
-# Custom periods + simple return
-dat_with_ret2 <- add_return(dat, n = c(1,20), type = "discrete")
-
-# Export pure factor data (date/code/name + factors)
-ret_only <- add_return(dat, append = FALSE)
-
+# Custom period and return type
+ret_only <- add_return(dat, n = c(1,20), type = "discrete", append = FALSE)
 ```
 
-### 4\. Multi\-period Momentum Calculation
+### Calculate Momentum & Volatility 动量与波动率计算
 
-```r
-# Default: 2/5/10-day momentum factors
-dat_with_mom <- add_mom(dat)
-
-# Custom long-period momentum
-dat_with_mom2 <- add_mom(dat, n = c(5,20,60))
-
-# Export pure momentum factors
-mom_only <- add_mom(dat, append = FALSE)
-
+``` r
+dat_with_mom <- add_mom(dat, n = c(5,20,60))
+dat_with_vol <- add_vol_std(dat, n = 10)
 ```
 
-## 🚀 安装教程 \&amp; 快速上手
+### Risk Adjusted Momentum 风险调整动量
 
-### 1\. 包安装方式
-
-当前包**仅支持 GitHub 在线安装**，暂未上架 CRAN 官方仓库。
-
-```r
-# 安装devtools工具（未安装则执行）
-if (!requireNamespace("devtools", quietly = TRUE))
-  install.packages("devtools")
-
-# 从GitHub安装最新版 FactorCraft
-devtools::install_github("dengyishuo/FactorCraft")
-
+``` r
+dat_ram <- add_risk_adj_mom(dat, n = 10, risk_type = "vol")
 ```
 
-### 2\. 加载包 \&amp; 获取行情数据
+## Core Advantages
 
-```r
-# 加载工具包
-library(FactorCraft)
+## 核心优势
 
-# 下载A股区间行情数据
-dat <- get_data(stock_list, start = "2020-01-01", end = "2025-01-01")
+-   Zero configuration, fit mainstream A-share
+    quantitative research scenarios
+    零配置即用，适配A股主流量化研究场景
 
-```
+-   Efficient batch computation, generate multiple
+    factors with one line code
+    高效批量运算，单行代码产出多周期因子
 
-### 3\. 多周期收益率因子计算
+-   Strict data verification, avoid data mismatch
+    and cross-stock errors
+    严苛数据校验，杜绝因子错位、串股异常
 
-```r
-# 默认计算1/5/10日对数收益率，追加至原数据
-dat_with_ret <- add_return(dat)
+-   Standard output with basic identification
+    fields, convenient for backtest
+    标准化输出自带标识字段，便于因子整合与策略回测
 
-# 自定义1/20日简单收益率
-dat_with_ret2 <- add_return(dat, n = c(1,20), type = "discrete")
+-   Good scalability, easy to expand more factor
+    and preprocessing modules
+    扩展性优异，可无缝新增各类因子与预处理工具
 
-# 仅导出收益率因子（含日期、代码、名称、因子列）
-ret_only <- add_return(dat, append = FALSE)
+## Project Structure
 
-```
+## 项目目录结构
 
-### 4\. 多周期动量因子计算
-
-```r
-# 默认2/5/10日动量因子
-dat_with_mom <- add_mom(dat)
-
-# 自定义5/20/60日长周期动量
-dat_with_mom2 <- add_mom(dat, n = c(5,20,60))
-
-# 单独导出动量因子矩阵
-mom_only <- add_mom(dat, append = FALSE)
-
-```
-
----
-
-## 📌 Core Advantages
-
-- **Zero Configuration**: Default parameters perfectly match mainstream A\-share quantitative research scenarios\.
-
-- **Efficient Batch Calculation**: One line of code generates multiple factors of different periods\.
-
-- **Absolute Data Safety**: Strict grouping and sorting avoid factor mismatch and cross\-stock errors\.
-
-- **Standardized Output**: Independent factor output reserves `date/code/name` for easy splicing and backtesting\.
-
-- **High Scalability**: Unified function template, support subsequent volatility, skewness, neutralization, orthogonalization and factor synthesis modules\.
-
-## 📌 核心特性亮点
-
-- **零配置开箱即用**：默认参数适配A股主流量化研究场景，无需复杂调参。
-
-- **高效批量计算**：一行代码批量生成多周期因子，大幅提升研究效率。
-
-- **数据安全可靠**：强制分组时序排序，彻底杜绝因子错位、串股等致命问题。
-
-- **输出规范统一**：单独导出因子自带日期、代码、股票名称，方便因子库拼接与回测。
-
-- **高可扩展性**：统一函数开发模板，后续波动率、偏度、中性化、正交化、多因子合成模块可无缝接入。
-
----
-
-## 📁 Project Structure
-
-```Plain Text
+```         
 FactorCraft/
-├── R/                    # Core function source code
-├── dev/                  # Development auxiliary files (ignored in package compilation)
-├── man/                  # Auto-generated documentation
-├── DESCRIPTION           # Package configuration
-├── NAMESPACE             # Function export configuration
-└── README.md             # Project introduction
-
+├── R/                    Core function source code 核心函数源码
+├── dev/                  Development auxiliary files 开发辅助文件
+├── man/                  Auto-generated documentation 自动生成文档
+├── DESCRIPTION           Package basic configuration 包基础配置
+├── NAMESPACE             Function export setting 函数导出配置
+└── README.md             Project introduction 项目说明文档
 ```
 
-## 📁 项目目录结构
+## Future Development Plan
 
-```Plain Text
-FactorCraft/
-├── R/                    # 核心函数源码文件夹
-├── dev/                  # 开发辅助文档（R包编译自动忽略）
-├── man/                  # 自动生成的帮助文档
-├── DESCRIPTION           # 包基础配置信息
-├── NAMESPACE             # 函数导出与依赖配置
-└── README.md             # 项目介绍文档
+## 后续开发规划
 
-```
+Subsequent updates will add skewness factor,
+volume factor, outlier processing,
+standardization, industry neutralization,
+orthogonalization and multi-factor combination
+modules.
 
----
+后续迭代将新增偏度因子、成交量因子、去极值、标准化、行业中性、正交化、多因子合成等功能模块。
 
-## 🔮 Future Development Plan
+--------------------------------------------------
 
-Subsequent updates will continuously add: volatility factors, skewness factors, volume\-based factors, outlier processing, standardization, industry neutralization, orthogonalization and multi\-factor synthesis modules\.
-
-## 🔮 后续开发计划
-
-后续将持续迭代更新：波动率因子、偏度因子、成交量类因子、去极值处理、标准化、行业中性化、正交化、多因子合成等全套量化工具模块。
-
----
-
-**FactorCraft — Make A\-share Factor Research More Standard, Efficient and Elegant**
-
-**FactorCraft — 让A股量化因子研究更标准、更高效、更优雅**
+**FactorCraft — Make A-share Factor Research More
+Standard, Efficient and Elegant** **FactorCraft —
+让A股量化因子研究更标准、更高效、更优雅**
