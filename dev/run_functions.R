@@ -94,7 +94,7 @@ library(dplyr)
 
 # 正确股票列表（code + name）
 stock_df <- data.frame(
-  code = c("000001.SZ", "000002.SZ", "600000.SH"),
+  code = c("000001.SZ", "000002.SZ", "600000.SS"),
   name = c("PingAn Bank", "Vanke A", "SPD Bank")
 )
 
@@ -102,7 +102,7 @@ stock_df <- data.frame(
 # 下载数据（正确参数）
 # --------------------
 dat <- get_data(
-  stock_df = stock_list, # 你包里面是 data，不是 stock_list
+  stock_df = stock_df, # 你包里面是 data，不是 stock_list
   start = "2024-01-01",
   end = "2024-06-01"
 )
@@ -327,3 +327,47 @@ result <- dat %>%
   select(date, code, name, ret_10, full_neu_ret_10)
 
 head(result, 10)
+
+
+stock_df <- data.frame(
+  code = c("000001.SZ", "000002.SZ", "000300.SS"),
+  name = c("Ping An Bank", "Vanke A", "CSI300")
+)
+
+
+dat <- get_data(
+  stock_df = stock_df,
+  start = "2024-01-01",
+  end = "2024-12-31"
+)
+
+dat <- add_return(dat, close_col = "close", n = 1, type = "discrete")
+
+# 0. Load required packages
+library(FactorCraft)
+library(dplyr)
+library(tibble)
+
+# ============================================================
+# Option A: Real A-share data (requires internet)
+# ============================================================
+stock_df <- data.frame(
+  code = c("000001.SZ", "000002.SZ", "000300.SS"),
+  name = c("Ping An Bank", "Vanke A", "CSI300")
+)
+
+cat("Downloading real data...\n")
+dat_real <- get_data(stock_df = stock_df, start = "2024-01-01", end = "2024-12-31")
+
+# Compute daily returns (discrete)
+dat_real <- add_return(dat_real, n = 1, type = "discrete")
+
+# Add benchmark returns (CSI300) and drop benchmark rows
+dat_real <- add_benchmark(dat_real, market_code = "000300.SS", y_col = "ret_1")
+
+# Compute rolling beta (60, 120, 250 days)
+result_real <- add_beta(dat_real, y_col = "ret_1", x_col = "benchmark_ret", n = c(60, 120, 250))
+
+cat("\n--- Real data result (first 20 rows for 000001.SZ) ---\n")
+print(head(result_real %>% filter(code == "000001.SZ") %>%
+  select(date, ret_1, benchmark_ret, beta_60, beta_120, beta_250), 20))

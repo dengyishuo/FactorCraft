@@ -14,30 +14,22 @@ add_industry_neutralize(
 )
 }
 \arguments{
-\item{data}{A data.frame or tibble in standard long format}
+\item{data}{Data.frame or tibble in long format}
 
-\item{factor_col}{Column name of the raw factor to neutralize}
+\item{factor_col}{Column name of raw factor}
 
-\item{industry_col}{Column name of industry classification (e.g., "industry")}
+\item{industry_col}{Column name of industry indicator}
 
-\item{by}{Grouping column for cross-section (default: "date")}
+\item{by}{Grouping column for cross-section (default: date)}
 
-\item{append}{If TRUE, append to original data}
+\item{append}{If TRUE, append result to input data}
 
-\item{new_col}{Prefix for output column}
+\item{new_col}{Prefix for new column name}
 }
 \value{
-A tibble/data.frame with original columns plus neutralized factor:
-\itemize{
-\item \strong{date}: Trading date
-\item \strong{code}: Stock code
-\item \strong{name}: Stock name
-\item \strong{industry}: Industry classification
-\item \strong{...}: Original input columns
-\item \strong{ind_neu_xxx}: Industry-neutralized factor (residual)
-}
+Data with industry-neutralized factor
 }
 \description{
-Compute industry-neutralized factor by cross-sectional regression.
-The function returns residuals (pure alpha) after removing industry fixed effects.
+Compute industry-neutralized factor using cross-sectional regression.
+Returns residuals after removing industry fixed effects.
 }

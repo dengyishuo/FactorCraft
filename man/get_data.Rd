@@ -2,48 +2,89 @@
 % Please edit documentation in R/get_data.R
 \name{get_data}
 \alias{get_data}
-\title{Batch Download Stock Data and Generate Standard Long Format Data}
+\title{Get Standardized Long-Format Stock Data from Yahoo Finance}
 \usage{
-get_data(stock_df, start_date, end_date)
+get_data(stock_df, start_date, end_date, output = c("data.frame", "tibble"))
 }
 \arguments{
-\item{stock_df}{Data frame containing code and name columns}
+\item{stock_df}{A data frame with \strong{code} and \strong{name} columns.
+Each row represents one stock.}
 
-\item{start_date}{Start date as "YYYY-MM-DD"}
+\item{start_date}{Character string in "YYYY-MM-DD" format.}
 
-\item{end_date}{End date as "YYYY-MM-DD"}
+\item{end_date}{Character string in "YYYY-MM-DD" format.}
+
+\item{output}{Output type: either \code{"data.frame"} (default) or \code{"tibble"}.}
 }
 \value{
-Standard long format data frame
-\itemize{
-\item date: Trading date
-\item code: Stock code
-\item name: Stock name
-\item open: Open price
-\item high: Highest price
-\item low: Lowest price
-\item close: Close price
-\item adjusted: Adjusted close price
-\item volume: Trading volume
+A data frame or tibble with standardized columns:
+\describe{
+\item{date}{Trading date (Date object)}
+\item{code}{Stock ticker code}
+\item{name}{Stock name}
+\item{open}{Opening price}
+\item{high}{Highest price}
+\item{low}{Lowest price}
+\item{close}{Closing price}
+\item{adjusted}{Adjusted closing price}
+\item{volume}{Trading volume}
 }
 }
 \description{
-Download historical K-bar data from Yahoo Finance, handle missing values,
-and return a standardized long format data frame for quantitative analysis
-and backtesting.
-Prices are forward-filled; volume is linearly interpolated.
+Download OHLCV data for multiple stocks, clean missing values,
+and return a structured long-format panel data frame.
+This function is designed for quantitative research, factor engineering,
+and backtesting pipelines.
 }
 \examples{
 \dontrun{
-stock_list <- data.frame(
-  code = c("000001.SS", "000300.SS"),
-  name = c("Ping An Bank", "CSI 300")
+# ------------------------------
+# Example 1: Basic usage (US stocks)
+# ------------------------------
+stock_df <- data.frame(
+  code = c("AAPL", "MSFT", "GOOG"),
+  name = c("Apple", "Microsoft", "Alphabet")
+)
+data <- get_data(
+  stock_df = stock_df,
+  start_date = "2023-01-01",
+  end_date = "2024-01-01"
 )
 
-data <- get_data(
-  stock_df = stock_list,
-  start_date = "2020-01-01",
+# ------------------------------
+# Example 2: Chinese A-shares
+# ------------------------------
+stock_df_cn <- data.frame(
+  code = c("000001.SS", "600000.SS", "000300.SS"),
+  name = c("PingAn Bank", "SPD Bank", "CSI 300 Index")
+)
+data_cn <- get_data(
+  stock_df = stock_df_cn,
+  start_date = "2022-01-01",
   end_date = "2025-01-01"
 )
+
+# ------------------------------
+# Example 3: Single stock download
+# ------------------------------
+single_stock <- data.frame(
+  code = "NVDA",
+  name = "NVIDIA"
+)
+data_nvda <- get_data(single_stock, "2023-06-01", "2024-06-01")
+
+# ------------------------------
+# Example 4: Inspect output structure
+# ------------------------------
+stock_df <- data.frame(code = "AMZN", name = "Amazon")
+data <- get_data(stock_df, "2023-01-01", "2023-02-01")
+str(data)
+head(data)
+colnames(data)
+
+# ------------------------------
+# Example 5: Output as tibble
+# ------------------------------
+data_tb <- get_data(stock_df, "2023-01-01", "2023-02-01", output = "tibble")
 }
 }

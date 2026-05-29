@@ -40,11 +40,9 @@ add_risk_adj_mom(
 }
 \value{
 Tibble/data.frame with columns:
-\itemize{
 \item{\code{ret_{n}}}{: Period return (same as add_return)}
 \item{\code{vol_std_{n}}}{: Rolling volatility (same as add_vol_std)}
 \item{\code{ram_{n}}}{: Risk-adjusted momentum = ret / vol_std}
-}
 }
 \description{
 Calculate risk-adjusted momentum using return / risk.

@@ -27,14 +27,14 @@ add_size_neutralize(
 \item{new_col}{Prefix for output column}
 }
 \value{
-A tibble/data.frame with original columns plus size-neutralized factor:
-\itemize{
-\item \strong{date}: Trading date
-\item \strong{code}: Stock code
-\item \strong{name}: Stock name
-\item \strong{size}: Market capitalization
-\item \strong{...}: Original input columns
-\item \strong{size_neu_xxx}: Size-neutralized factor (residual)
+A tibble or data frame with original columns and a size-neutralized factor.
+\describe{
+\item{date}{Trading date}
+\item{code}{Stock code}
+\item{name}{Stock name}
+\item{size}{Market capitalization}
+\item{...}{All original input columns}
+\item{size_neu_xxx}{Size-neutralized factor (regression residuals)}
 }
 }
 \description{

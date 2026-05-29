@@ -9,14 +9,16 @@
 #' @param append if TRUE, append results to input data
 #' @param new_col prefix for new columns
 #'
-#' @return A tibble/data.frame with original columns plus new winsorized columns:
-#' \itemize{
-#'   \item \strong{date}: trading date
-#'   \item \strong{code}: stock code
-#'   \item \strong{...}: original input columns
-#'   \item \strong{win_xxx}: winsorized version of input column xxx
+#' @return A tibble or data frame with original columns and winsorized factors:
+#' \describe{
+#'   \item{date}{Trading date}
+#'   \item{code}{Stock code}
+#'   \item{...}{All original input columns}
+#'   \item{\code{win_xxx}}{Winsorized factor (outliers clipped to quantile limits)}
 #' }
 #' @export
+#' @importFrom dplyr group_by mutate ungroup select starts_with
+#' @importFrom rlang sym !! :=
 add_winsorize <- function(
   data,
   cols = NULL,

@@ -18,12 +18,12 @@ add_standardize(data, cols = NULL, by = "date", append = TRUE, new_col = "std")
 \item{new_col}{prefix for new columns}
 }
 \value{
-A tibble/data.frame with original columns plus new standardized columns:
-\itemize{
-\item \strong{date}: trading date
-\item \strong{code}: stock code
-\item \strong{...}: original input columns
-\item \strong{std_xxx}: z-score normalized version of input column xxx
+A tibble or data frame with original columns and standardized factors:
+\describe{
+\item{date}{Trading date}
+\item{code}{Stock code}
+\item{...}{All original input columns}
+\item{\code{std_xxx}}{Z-score normalized factor (mean = 0, sd = 1)}
 }
 }
 \description{

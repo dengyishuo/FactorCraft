@@ -1,13 +1,3 @@
-#' FactorCraft: Quantitative Factor Engineering Toolkit
-#'
-#' Provides factor generation, industry/market cap neutralization,
-#' orthogonalization, winsorizing, standardization, and multi-factor
-#' combination, all in a chainable add_* style.
-#'
-#' @author Deng Yishuo <dengyishuo@163.com>
-#' @keywords factor quantitative finance
-"_PACKAGE"
-
 #' Add Momentum Factor(s)
 #'
 #' Calculate momentum factors using TTR::ROC for multiple periods, grouped by stock.
@@ -21,7 +11,6 @@
 #' @param na.pad Pad leading NAs
 #' @param append If TRUE, append to data; if FALSE, return date+code+name+factors
 #' @param output "tibble" or "data.frame"
-#'
 #' @return Data frame or tibble with momentum factor(s)
 #' @export
 #' @importFrom dplyr group_by mutate ungroup arrange select across all_of

@@ -10,16 +10,18 @@
 #' @param append If TRUE, append to original data
 #' @param new_col Prefix for output column
 #'
-#' @return A tibble/data.frame with original columns plus size-neutralized factor:
-#' \itemize{
-#'   \item \strong{date}: Trading date
-#'   \item \strong{code}: Stock code
-#'   \item \strong{name}: Stock name
-#'   \item \strong{size}: Market capitalization
-#'   \item \strong{...}: Original input columns
-#'   \item \strong{size_neu_xxx}: Size-neutralized factor (residual)
+#' @return A tibble or data frame with original columns and a size-neutralized factor.
+#' \describe{
+#'   \item{date}{Trading date}
+#'   \item{code}{Stock code}
+#'   \item{name}{Stock name}
+#'   \item{size}{Market capitalization}
+#'   \item{...}{All original input columns}
+#'   \item{size_neu_xxx}{Size-neutralized factor (regression residuals)}
 #' }
 #' @export
+#' @importFrom dplyr group_by mutate ungroup select all_of
+#' @importFrom rlang sym !! :=
 add_size_neutralize <- function(
   data,
   factor_col = NULL,

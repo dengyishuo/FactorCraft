@@ -10,7 +10,6 @@
 #' @param na.pad Pad trailing NAs
 #' @param append If TRUE, append to data; if FALSE, return date+code+name+forward returns
 #' @param output "tibble" or "data.frame"
-#'
 #' @return Data frame or tibble with forward return columns
 #' @export
 #' @importFrom dplyr group_by mutate ungroup arrange select all_of

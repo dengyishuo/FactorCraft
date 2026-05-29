@@ -1,7 +1,7 @@
 Package: FactorCraft
 Title: Factor Engineering Toolkit for Quantitative Investment
 Version: 0.1.0
-Authors@R: person("Deng Yishuo", , role = c("aut", "cre"), email = "dengyishuo@163.com")
+Authors@R: person("Deng Yishuo", role = c("aut", "cre"), email = "dengyishuo@163.com")
 Description: A toolkit for factor generation, industry/marketcap neutralization,
     factor orthogonalization, correlation analysis, and multi-factor synthesis
     in quantitative investment.
@@ -11,13 +11,16 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
 Imports:
     dplyr,
-    data.table,
+    ggplot2,
     quantmod,
-    xts,
-    zoo,
+    rlang,
+    roll,
     stats,
-    utils,
-    TTR,
     tibble,
-    magrittr,
-    rlang
+    tidyr,
+    TTR,
+    xts,
+    zoo
+Depends: 
+    R (>= 3.5)
+LazyData: true

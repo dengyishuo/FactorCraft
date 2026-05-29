@@ -1,13 +1,3 @@
-#' FactorCraft: Quantitative Factor Engineering Toolkit
-#'
-#' Provides factor generation, industry/market cap neutralization,
-#' orthogonalization, winsorizing, standardization, and multi-factor
-#' combination, all in a chainable add_* style.
-#'
-#' @author Deng Yishuo <dengyishuo@163.com>
-#' @keywords factor quantitative finance
-"_PACKAGE"
-
 #' Add Risk-Adjusted Momentum (RAM)
 #'
 #' Calculate risk-adjusted momentum using return / risk.
@@ -25,11 +15,9 @@
 #' @param output "tibble" or "data.frame"
 #'
 #' @return Tibble/data.frame with columns:
-#' \itemize{
 #'   \item{\code{ret_{n}}}{: Period return (same as add_return)}
 #'   \item{\code{vol_std_{n}}}{: Rolling volatility (same as add_vol_std)}
 #'   \item{\code{ram_{n}}}{: Risk-adjusted momentum = ret / vol_std}
-#' }
 #' @export
 #' @importFrom dplyr group_by mutate ungroup arrange select all_of
 #' @importFrom TTR ROC

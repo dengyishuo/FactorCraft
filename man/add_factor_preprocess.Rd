@@ -14,30 +14,28 @@ add_factor_preprocess(
 )
 }
 \arguments{
-\item{data}{data.frame or tibble}
+\item{data}{data.frame or tibble in long format (required: date, code, name)}
 
-\item{factor_col}{column name of raw factor to process}
+\item{factor_col}{Character. Column name of the raw factor to process.}
 
-\item{industry_col}{industry column name}
+\item{industry_col}{Character. Column name for industry classification. Default: "industry".}
 
-\item{size_col}{market cap column name}
+\item{size_col}{Character. Column name for market capitalization (size). Default: "size".}
 
-\item{probs}{winsorize quantiles (default c(0.01, 0.99))}
+\item{probs}{Numeric vector. Winsorization quantiles (lower, upper). Default: c(0.01, 0.99).}
 
-\item{append}{if TRUE, append to data}
+\item{append}{Logical. If TRUE, append new columns to input data; if FALSE, return only key columns + final factor. Default: TRUE.}
 }
 \value{
-A tibble with FULL preprocessed factors:
-\itemize{
-\item \strong{date}: trading date
-\item \strong{code}: stock code
-\item \strong{name}: stock name
-\item \strong{industry}: industry
-\item \strong{size}: market cap
-\item \strong{win_xxx}: winsorized factor
-\item \strong{std_xxx}: standardized factor
-\item \strong{ind_neu_xxx}: industry-neutralized factor
-\item \strong{full_neu_xxx}: FINAL fully processed factor (industry + size neutralized)
+A tibble with fully preprocessed factor columns:
+\describe{
+\item{date}{Trading date (Date format)}
+\item{code}{Stock ticker symbol (character)}
+\item{name}{Stock name (character)}
+\item{\code{win_*}}{Winsorized version of the raw factor}
+\item{\code{std_*}}{Standardized (z-score) version after winsorization}
+\item{\code{ind_neu_*}}{Industry-neutralized factor (residuals from industry regression)}
+\item{\code{full_neu_*}}{Final fully processed factor (industry + size neutralized)}
 }
 }
 \description{

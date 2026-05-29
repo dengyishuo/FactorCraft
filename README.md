@@ -3,6 +3,7 @@
 **FactorCraft**: A Standardized Full-process
 Factor Engineering Toolkit for A-share
 Quantitative Research
+
 **FactorCraft**：一款面向A股量化投资的轻量、标准化、全流程因子工程R工具包
 
 --------------------------------------------------
@@ -19,8 +20,7 @@ function logic, repetitive multi-period
 calculation, low code reusability and non-standard
 output layout.
 
-**FactorCraft**
-是专为A股量化研究打造的标准化因子开发框架，解决数据杂乱、函数逻辑不统一、多周期计算繁琐、代码复用性差、输出格式不规范等常见问题。
+**FactorCraft** 是专为A股量化研究打造的标准化因子开发框架，解决数据杂乱、函数逻辑不统一、多周期计算繁琐、代码复用性差、输出格式不规范等常见问题。
 
 All functions adopt unified parameter rules,
 output styles and chainable calling mode. Support
